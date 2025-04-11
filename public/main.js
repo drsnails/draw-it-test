@@ -31,12 +31,13 @@ function onInit() {
         gLastPositions.push(pos)
         const draw = drawFns[brush.shape]
         draw({ pos, brush, lastPos })
+        clearServerLastPos()
     })
-
-
 }
 
-
+const clearServerLastPos = debounce(() => {
+    gLastPositions.push(null)
+}, 500)
 
 const drawFns = {
     pencil: drawPencil
