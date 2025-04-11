@@ -18,6 +18,9 @@ let gSocket
 let gLastPositions = {}
 
 
+const gDrawFns = {
+    pencil: drawPencil
+}
 
 
 
@@ -48,9 +51,6 @@ function onInit() {
     })
 }
 
-const gDrawFns = {
-    pencil: drawPencil
-}
 
 
 function onDown(ev) {
