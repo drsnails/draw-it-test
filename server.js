@@ -22,6 +22,10 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('server-drawing', data)
     })
 
+    socket.on('client-pencil-up', async (data) => {
+        socket.broadcast.emit('server-pencil-up')
+    })
+
 
     socket.on('disconnect', () => {
         console.log('User disconnect')

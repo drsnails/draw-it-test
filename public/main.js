@@ -31,13 +31,16 @@ function onInit() {
         gLastPositions.push(pos)
         const draw = drawFns[brush.shape]
         draw({ pos, brush, lastPos })
-        clearServerLastPos()
+    })
+
+    socketService.on('server-pencil-up', () => {
+        gLastPositions.push(null)
     })
 }
 
-const clearServerLastPos = debounce(() => {
-    gLastPositions.push(null)
-}, 500)
+// const clearServerLastPos = debounce(() => {
+//     gLastPositions.push(null)
+// }, 500)
 
 const drawFns = {
     pencil: drawPencil
@@ -54,14 +57,17 @@ function onDown(ev) {
 function onMove(ev) {
     if (!gIsMouseDown) return
     const pos = getEvPos(ev)
-
     const draw = drawFns[gBrush.shape]
     draw({ pos })
     socketService.emit('client-drawing', { brush: gBrush, pos, lastPos: gLastPos })
-    //* Update start position for next move calculation
     gLastPos = pos
 
-    //* Redraw the canvas with updated circle position
+}
+
+
+function onUp() {
+    gIsMouseDown = false
+    socketService.emit('client-pencil-up')
 }
 
 
@@ -75,11 +81,6 @@ function drawPencil({ pos, brush = gBrush, lastPos = gLastPos }) {
     gCtx.lineWidth = brush.size
     gCtx.stroke()
 
-}
-
-
-function onUp() {
-    gIsMouseDown = false
 }
 
 function resizeCanvas() {
