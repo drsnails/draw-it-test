@@ -1,5 +1,5 @@
 :root {
-  
+
     --clr-neutral-light-hsl: 0 0% 95%;
     --clr-neutral-100-hsl: 0 0% 90%;
     --clr-neutral-200-hsl: 0 0% 80%;
@@ -34,12 +34,14 @@ body {
 }
 
 body {
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
 }
 
-/* .canvas-container {
-} */
+.canvas-container {
+    height: 85vmin;
+    aspect-ratio: 1/1;
+}
 
 .dark {
     background-color: var(--clr-neutral-500);

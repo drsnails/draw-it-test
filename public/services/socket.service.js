@@ -36,6 +36,9 @@ function createSocketService() {
         emit(eventName, data) {
             socket.emit(eventName, data)
         },
+        broadcast(eventName, data) {
+            socket.broadcast.emit(eventName, data)
+        },
         login() {
             socket.emit(SOCKET_EMIT_LOGIN, 'LOGIN')
         },

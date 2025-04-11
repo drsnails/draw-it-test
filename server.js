@@ -19,11 +19,11 @@ io.on('connection', (socket) => {
     })
 
     socket.on('client-drawing', async (data) => {
-        socket.broadcast.emit('server-drawing', data)
+        socket.broadcast.emit('server-drawing', { ...data, userId: socket.userId })
     })
 
     socket.on('client-pencil-up', async (data) => {
-        socket.broadcast.emit('server-pencil-up')
+        socket.broadcast.emit('server-pencil-up', { userId: socket.userId })
     })
 
 
